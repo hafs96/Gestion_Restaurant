@@ -8,9 +8,8 @@ const reservationSchema = new mongoose.Schema({
     ref: 'User',
     required: true,
   },
-  tableid: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Table',
+  table: {
+    type: String,
     required: true,
   },
   datereservation: {

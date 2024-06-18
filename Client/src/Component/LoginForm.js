@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../styles/signin.css';
 import axios from 'axios';
+import { useAuth } from '../contexts/AuthContext';
 
 const LoginForm = () => {
+    const { login } = useAuth();
     const [formData, setFormData] = useState({
         email: '',
         password: ''
@@ -22,6 +24,7 @@ const LoginForm = () => {
             alert('Login successful!');
             localStorage.setItem('token', response.data.token);
             localStorage.setItem('userId', response.data.userId);
+            login(response);
             navigate('/reservation');
         } catch (error) {
             console.error(error);

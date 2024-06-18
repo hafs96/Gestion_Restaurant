@@ -8,7 +8,7 @@ const Joi = require('joi');
 // Route POST pour créer une nouvelle réservation
 const reservationSchema = Joi.object({
   clientid: Joi.string().required(),
-  tableid: Joi.string().required(),
+  table: Joi.string().required(),
   datereservation: Joi.date().required(),
   heurereservation: Joi.string().required()
 });
@@ -21,12 +21,12 @@ router.post('/api/reservation', async (req, res) => {
       return res.status(400).json({ message: 'Validation error', details: error.details });
   }
 
-  const { clientid, tableid, datereservation, heurereservation } = req.body;
+  const { clientid, table, datereservation, heurereservation } = req.body;
 
   try {
       const newReservation = new Reservation({
           clientid,
-          tableid,
+          table,
           datereservation,
           heurereservation
       });

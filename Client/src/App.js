@@ -7,9 +7,11 @@ import LoginForm from './Component/LoginForm';
 import Home from './Component/Home';
 import LearnMore from './Component/LearnMore';
 import { ReservationProvider } from './contexts/ReservationContext';
+import { AuthProvider } from './contexts/AuthContext';
 
 function App() {
     return (
+      <AuthProvider>
         <Router>
             <ReservationProvider>
                 <div>
@@ -23,6 +25,7 @@ function App() {
                 </div>
             </ReservationProvider>
         </Router>
+        </AuthProvider>
     );
 }
 
