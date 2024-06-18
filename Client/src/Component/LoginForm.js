@@ -18,6 +18,8 @@ const LoginForm = () => {
             const response = await axios.post('http://localhost:5000/api/login', formData);
             console.log(response.data);
             alert('Login successful!');
+            localStorage.setItem('token', response.data.token);
+            localStorage.setItem('userId', response.data.userId);
             navigate('/reservation');
         } catch (error) {
             console.error(error);
