@@ -1,37 +1,40 @@
+// routes/reservation.js
+
 const express = require('express');
 const router = express.Router();
 const Reservation = require('../Models/ReservationModel');
-const Table = require('../Models/TableModel');
-const verifyToken = require('../middleware/authMiddleware');
+const Joi = require('joi');
 
+// Route POST pour créer une nouvelle réservation
+const reservationSchema = Joi.object({
+  clientid: Joi.string().required(),
+  tableid: Joi.string().required(),
+  datereservation: Joi.date().required(),
+  heurereservation: Joi.string().required()
+});
 
-// POST pour créer une nouvelle réservation
-router.post('/reservations', verifyToken, async (req, res) => {
-    const { tableid, datereservation, heurereservation } = req.body;
-    const clientid = req.clientid;
+router.post('/api/reservation', async (req, res) => {
+  console.log('Requête reçue pour créer une réservation :', req.body);
+  const { error } = reservationSchema.validate(req.body);
+
+  if (error) {
+      return res.status(400).json({ message: 'Validation error', details: error.details });
+  }
+
+  const { clientid, tableid, datereservation, heurereservation } = req.body;
 
   try {
-    // Vérifier si la table est disponible
-    const table = await Table.findById(tableid);
-    if (!table || table.status !== 'available') {
-      return res.status(400).json({ message: 'La table spécifiée n\'est pas disponible pour la réservation.' });
-    }
-    // Créer la réservation
-    const newReservation = new Reservation({
-      clientid,
-      tableid,
-      datereservation,
-      heurereservation
-    });
+      const newReservation = new Reservation({
+          clientid,
+          tableid,
+          datereservation,
+          heurereservation
+      });
 
-    // Mettre à jour le statut de la table à 'reserved'
-    table.status = 'reserved';
-    await table.save();
-
-    const savedReservation = await newReservation.save();
-    res.status(201).json(savedReservation);
-  } catch (err) {
-    res.status(500).json({ message: err.message });
+      await newReservation.save();
+      res.status(201).json({ message: 'Réservation créée avec succès', reservation: newReservation });
+  } catch (error) {
+      res.status(500).json({ message: 'Erreur lors de la création de la réservation', error });
   }
 });
 

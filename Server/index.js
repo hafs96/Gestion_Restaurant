@@ -22,11 +22,10 @@ db.once('open', () => {
 });
 
 const tableRoutes = require('./Routes/Table');
-const reservationsRouter = require('./Routes/Reservation');
 app.use('/api/tables', tableRoutes);
 app.use('/api/auth', require('./Routes/auth'));
 app.use('/api', require('./Routes/Login'));
-app.use('/api/reservations', reservationsRouter);
+app.use('/', require('./Routes/Reservation'));
 
 
 
