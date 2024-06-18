@@ -1,19 +1,15 @@
 const express = require('express');
+const router = express.Router();
 const Table = require('../Models/TableModel');
 
-const router = express.Router();
-
-// Route pour récupérer les tables
-router.get('/api/tables', async (req, res) => {
-    try {
-         const tables = await Table.find();
-         console.log('Tables fetched:', tables);
-         res.json(tables);
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server error');
-    }
+// GET toutes les tables disponibles
+router.get('/tables/disponibles', async (req, res) => {
+  try {
+    const tablesDisponibles = await Table.find({ status: 'available' });
+    res.json(tablesDisponibles);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 });
 
 module.exports = router;
-

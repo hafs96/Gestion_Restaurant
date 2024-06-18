@@ -26,7 +26,7 @@ const reservationsRouter = require('./Routes/Reservation');
 app.use('/api/tables', tableRoutes);
 app.use('/api/auth', require('./Routes/auth'));
 app.use('/api', require('./Routes/Login'));
-app.use('/reservations', reservationsRouter);
+app.use('/api/reservations', reservationsRouter);
 
 
 

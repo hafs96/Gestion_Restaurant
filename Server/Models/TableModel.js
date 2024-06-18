@@ -1,22 +1,10 @@
 const mongoose = require('mongoose');
 
-const tableSchema = new mongoose.Schema({
-    tableId: {
-        type: String, 
-        required: true,
-        unique: true
-    },
-    nbr_chaises: {
-        type: Number,
-        required: true
-    },
-    status: {
-        type: String,
-        enum: ['available', 'occupied', 'reserved'], 
-        default: 'available'
-    }
+const TableSchema = new mongoose.Schema({
+  tableid: { type: String, required: true },
+  status: { type: String, enum: ['available', 'reserved', 'occupied'], default: 'available' },
+  nbr_chaises: { type: Number, required: true },
+  prix: {type: Number, required: true }
 });
 
-const table = mongoose.model('table', tableSchema);
-
-module.exports = table;
+module.exports = mongoose.model('Table', TableSchema);

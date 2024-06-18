@@ -17,6 +17,7 @@ const LoginForm = () => {
         e.preventDefault();
         try {
             const response = await axios.post('http://localhost:5000/api/login', formData);
+            localStorage.setItem('token', response.data.token);
             console.log(response.data);
             alert('Login successful!');
             localStorage.setItem('token', response.data.token);

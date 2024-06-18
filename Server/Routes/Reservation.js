@@ -1,33 +1,38 @@
 const express = require('express');
-const jwt = require('jsonwebtoken');
-const Reservation = require('../Models/ReservationModel');
-
 const router = express.Router();
+const Reservation = require('../Models/ReservationModel');
+const Table = require('../Models/TableModel');
+const verifyToken = require('../middleware/authMiddleware');
 
-router.post('/reservations', async (req, res) => {
-    const { date, time, numberOfPeople, tableId } = req.body;
 
-    try {
-        // Valider l'utilisateur avec le token JWT
-        const token = req.headers.authorization.split(' ')[1];
-        const decodedToken = jwt.verify(token, 'hafsa');
-        const userId = decodedToken.userId;
+// POST pour créer une nouvelle réservation
+router.post('/reservations', verifyToken, async (req, res) => {
+    const { tableid, datereservation, heurereservation } = req.body;
+    const clientid = req.clientid;
 
-        const newReservation = new Reservation({
-            user: userId,
-            table: tableId,
-            date,
-            time,
-            numberOfPeople
-        });
-
-        await newReservation.save();
-
-        res.status(201).json({ msg: 'Reservation successful', reservation: newReservation });
-    } catch (err) {
-        console.error(err.message);
-        res.status(500).send('Server error');
+  try {
+    // Vérifier si la table est disponible
+    const table = await Table.findById(tableid);
+    if (!table || table.status !== 'available') {
+      return res.status(400).json({ message: 'La table spécifiée n\'est pas disponible pour la réservation.' });
     }
+    // Créer la réservation
+    const newReservation = new Reservation({
+      clientid,
+      tableid,
+      datereservation,
+      heurereservation
+    });
+
+    // Mettre à jour le statut de la table à 'reserved'
+    table.status = 'reserved';
+    await table.save();
+
+    const savedReservation = await newReservation.save();
+    res.status(201).json(savedReservation);
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
 });
 
 module.exports = router;
