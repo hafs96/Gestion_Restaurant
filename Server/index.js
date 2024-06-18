@@ -24,6 +24,8 @@ db.once('open', () => {
 
 const reservationsRouter = require('./Routes/Reservation');
 app.use('/reservations', reservationsRouter);
+app.use('/api/auth', require('./Routes/auth'));
+app.use('/api', require('./Routes/Login'));
 
 
 app.listen(port, () => {

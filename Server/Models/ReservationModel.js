@@ -1,12 +1,11 @@
 const mongoose = require('mongoose');
 
 const reservationSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  phone: String,
-  date: Date,
-  time: String,
-  guests: Number,
+  
+  clientId: { type: mongoose.Schema.Types.ObjectId, ref: 'client', required: true },
+  tableId: { type: mongoose.Schema.Types.ObjectId, ref: 'table', required: true },
+  date: { type: Date, required: true },
+  time: { type: String, required: true }
 });
 
 module.exports = mongoose.model('Reservation', reservationSchema);

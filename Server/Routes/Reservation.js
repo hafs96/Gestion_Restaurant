@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const authMiddleware = require('../middleware/authMiddleware');
 const Reservation = require('../Models/ReservationModel');
+
+router.use(authMiddleware);
 
 router.get('/', async (req, res) => {
   try {
@@ -12,22 +15,19 @@ router.get('/', async (req, res) => {
 });
 
 
-router.post('/', async (req, res) => {
-  const reservation = new Reservation({
-    name: req.body.name,
-    email: req.body.email,
-    phone: req.body.phone,
-    date: req.body.date,
-    time: req.body.time,
-    guests: req.body.guests,
-  });
 
+router.post('/add', async (req, res) => {
   try {
-    const newReservation = await reservation.save();
+    const { clientId, tableId, date, time, guests } = req.body;
+    const reservation = new Reservation({ clientId, tableId, date, time});
+    await reservation.save();
     res.status(201).json(newReservation);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
+  }catch (error) {
+      res.status(400).json({ message: error.message });
   }
-});
+
+  });
+  
+
 
 module.exports = router;
