@@ -21,11 +21,13 @@ db.once('open', () => {
   console.log('Connected to MongoDB');
 });
 
-
+const tableRoutes = require('./Routes/Table');
 const reservationsRouter = require('./Routes/Reservation');
-app.use('/reservations', reservationsRouter);
+app.use('/api/tables', tableRoutes);
 app.use('/api/auth', require('./Routes/auth'));
 app.use('/api', require('./Routes/Login'));
+app.use('/reservations', reservationsRouter);
+
 
 
 app.listen(port, () => {

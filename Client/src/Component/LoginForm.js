@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../styles/signin.css';
 import axios from 'axios';
 
 const LoginForm = () => {
@@ -28,11 +29,22 @@ const LoginForm = () => {
     };
 
     return (
+        <div className="signin-container">
+            <h2>Se connecter </h2>
         <form onSubmit={handleSubmit}>
+            <div className="form-group">
+            <label htmlFor="email">Email</label>
             <input type="email" name="email" placeholder="Email" value={formData.email} onChange={handleChange} required />
-            <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} required />
-            <button type="submit">Login</button>
+        </div>
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
+          <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} required />
+        </div>
+        <button type="submit" className="btn">Se connecter</button>
+        <hr /> <br />
+        <p>Vous n'avez pas de compte ?<a href="/signup"><strong> Creer un compte</strong></a></p>
         </form>
+        </div>
     );
 };
 

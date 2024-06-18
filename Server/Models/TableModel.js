@@ -17,6 +17,6 @@ const tableSchema = new mongoose.Schema({
     }
 });
 
-const Table = mongoose.model('Table', tableSchema);
+const table = mongoose.model('table', tableSchema);
 
-module.exports = Table;
+module.exports = table;
