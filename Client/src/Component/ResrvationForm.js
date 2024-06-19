@@ -82,6 +82,8 @@ const ReservationForm = () => {
         />
       </div>
       <button type="submit">Réserver</button>
+      <br></br>
+      <a href='/Liste'>Les reservations</a>
     </form>
     </div>
   );
