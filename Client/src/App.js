@@ -27,7 +27,7 @@ function App() {
                         <Route path='/learnmore' element={<LearnMore />} />
                         <Route path='/Liste' element={<ReservationList />} />
                         <Route path='/tables' element={<Tables />} />
-                        <Route path='/accueil' element={<Home />} />
+                        <Route path='/accueil' element={<HomePage />} />
                     </Routes>
                 </div>
             </ReservationProvider>
