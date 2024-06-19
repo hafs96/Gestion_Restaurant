@@ -29,6 +29,24 @@ const ReservationList = () => {
 
         fetchReservations(); // Appel de la fonction pour récupérer les réservations au chargement du composant
     }, []);
+    const deleteReservation = async (id) => {
+        try {
+            const response = await fetch(`http://localhost:5000/api/reservations/${id}`, {
+                method: 'DELETE',
+            });
+
+            if (response.ok) {
+                setReservations(reservations.filter(reservation => reservation._id !== id));
+                alert('Réservation supprimée avec succès');
+            } else {
+                alert('Erreur lors de la suppression de la réservation');
+            }
+        } catch (error) {
+            console.error('Erreur lors de la suppression de la réservation:', error);
+            alert('Erreur lors de la suppression de la réservation');
+        }
+    };
+
 
     return (
         <div className="reser-container">
@@ -42,8 +60,8 @@ const ReservationList = () => {
                             <p><strong>Date de reservation : </strong>{reservation.datereservation}</p>
                             <p><strong>Heure de reservation : </strong>{reservation.heurereservation}</p>
                             {/* action pour supprimer reservation */}
-                            <button>Delete</button>
-                            
+                            <button onClick={() => deleteReservation(reservation._id)}>Annuler</button>
+
                         </div>
                     </li>
                 ))}
