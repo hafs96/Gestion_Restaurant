@@ -57,7 +57,7 @@ const SignupForm = () => {
         </div>
         <button type="submit" className="btn">S'inscrire</button>
         <hr /> <br />
-        <p>Vous avez de compte ?<a href="/login"><strong> Se connecter</strong></a></p>
+        <p className="cmp">Vous avez de compte ?<a href="/login"><strong> Se connecter</strong></a></p>
         </form>
         </div>
     );

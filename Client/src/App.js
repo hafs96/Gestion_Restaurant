@@ -9,9 +9,12 @@ import LearnMore from './Component/LearnMore';
 import ReservationList from './Component/ListReservation';
 import { ReservationProvider } from './contexts/ReservationContext';
 import { AuthProvider } from './contexts/AuthContext';
+import Tables from './Component/Tables';
+import HomePage from './Component/HomePage';
+
 
 function App() {
-    return (
+    return (   
       <AuthProvider>
         <Router>
             <ReservationProvider>
@@ -23,6 +26,8 @@ function App() {
                         <Route path="/reservation" element={<ReservationForm />} />
                         <Route path='/learnmore' element={<LearnMore />} />
                         <Route path='/Liste' element={<ReservationList />} />
+                        <Route path='/tables' element={<Tables />} />
+                        <Route path='/accueil' element={<Home />} />
                     </Routes>
                 </div>
             </ReservationProvider>

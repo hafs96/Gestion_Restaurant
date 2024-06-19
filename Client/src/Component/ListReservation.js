@@ -70,17 +70,17 @@ const ReservationList = () => {
                 {reservations.map(reservation => (
                     <li key={reservation._id}>
                         <div className="fr">
-                            <p><strong>Client reserve : </strong> {reservation.clientid}</p>
-                            <p><strong>Table reserve : </strong>{reservation.table}</p>
-                            <p><strong>Date de reservation : </strong>{reservation.datereservation}</p>
-                            <p><strong>Heure de reservation : </strong>{reservation.heurereservation}</p>
+                            <p className='cmp'><strong>Client reserve : </strong> {reservation.clientid}</p>
+                            <p className='cmp'><strong>Table reserve : </strong>{reservation.table}</p>
+                            <p className='cmp'><strong>Date de reservation : </strong>{reservation.datereservation}</p>
+                            <p className='cmp'><strong>Heure de reservation : </strong>{reservation.heurereservation}</p>
                             <div className='bUtn'>
                              {/* Action pour modifier la réservation */}
-                             {editingReservation === reservation._id ? (
+                             {/* {editingReservation === reservation._id ? (
                                 <ModifyReservationForm reservation={reservation} onUpdate={handleUpdate} />
                             ) : (
                                 <button onClick={() => handleEditClick(reservation._id)} className='mod'>Modifier</button>
-                            )}
+                            )} */}
                             {/* action pour supprimer reservation */}
                             <button onClick={() => deleteReservation(reservation._id)} className='mod'>Annuler</button></div>
                         </div>

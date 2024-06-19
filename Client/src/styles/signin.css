@@ -50,4 +50,8 @@
   .btn:hover {
     background-color: #000080; /* Navy Blue color */
   }
+.cmp{
+  font-size: medium;
+  color: black;
+}
   

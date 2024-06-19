@@ -17,6 +17,7 @@ const ModifyReservationForm = ({ reservation, onUpdate }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
         try {
             const response = await fetch(`http://localhost:5000/api/reservations/${reservation._id}`, {
                 method: 'PUT',
@@ -47,20 +48,17 @@ const ModifyReservationForm = ({ reservation, onUpdate }) => {
                     type="text"
                     name="clientid"
                     value={formData.clientid}
-                    onChange={handleChange}
-                    required
+                    disabled
                 />
             </label>
             <br />
             <label>
                 Table:
-                <input
-                    type="text"
-                    name="table"
-                    value={formData.table}
-                    onChange={handleChange}
-                    required
-                />
+                <select value={formData.table} onChange={handleChange}>
+                    <option value="Table 1">Table 1</option>
+                    <option value="Table 2">Table 2</option>
+                    <option value="Table 3">Table 3</option>
+                </select>
             </label>
             <br />
             <label>
@@ -77,18 +75,18 @@ const ModifyReservationForm = ({ reservation, onUpdate }) => {
             <label>
                 Heure de réservation:
                 <input
-                            type="time"
-                            name="heurereservation"
-                            value={formData.heurereservation}
-                            onChange={handleChange}
-                        />
-                    </label>
-                    <button type="submit">Mettre à jour</button>
-                </form>
-             
-   
+                    type="time"
+                    name="heurereservation"
+                    value={formData.heurereservation}
+                    onChange={handleChange}
+                />
+            </label>
+            <button type="submit">Mettre à jour</button>
+        </form>
+
+
     );
 };
-   
-   
+
+
 export default ModifyReservationForm;

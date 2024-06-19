@@ -5,16 +5,15 @@ export default function NavBar() {
   return (
     <div>
       <nav className='nav'>
-         <Link to="/" className='logo bg-emerald-600 rounded text-xl  text-white my-2 mx-2 ' >O-persia Restaurant</Link>
+        <ul><h3 className='titre'>Le Gourmet Elegance</h3></ul>
+        
         <ul className='nav-middle'>
             <CustomLink to='/Reservations'>Reservations</CustomLink>
-            <CustomLink to='/Payments'>Payments</CustomLink>
-            <CustomLink to='/FindFood'>Find Food</CustomLink>
-            <CustomLink to='/Location'>Location</CustomLink>
+            <CustomLink to='/tables'>Tables</CustomLink>
+            <CustomLink to='/learnmore'>En savoir plus</CustomLink>
         </ul>
         <ul>
-            <Link to='/login'>Connexion</Link>
-            <Link to='/signup'>Inscription</Link>
+            <Link to='/'>Se deconnecter</Link>
         </ul>
           
       </nav>
