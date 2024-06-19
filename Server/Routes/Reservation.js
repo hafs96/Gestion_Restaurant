@@ -35,6 +35,38 @@ router.post('/api/reservation', async (req, res) => {
       res.status(500).json({ message: 'Erreur lors de la création de la réservation', error });
   }
 });
+// Schéma de validation pour la mise à jour de la réservation
+const updateReservationSchema = Joi.object({
+  clientid: Joi.string(),
+  table: Joi.string(),
+  datereservation: Joi.date(),
+  heurereservation: Joi.string()
+});
+
+// Route pour mettre à jour une réservation par ID
+router.put('/api/reservations/:id', async (req, res) => {
+  const { error } = updateReservationSchema.validate(req.body);
+  
+  if (error) {
+      return res.status(400).json({ message: 'Validation error', details: error.details });
+  }
+
+  try {
+      const updatedReservation = await Reservation.findByIdAndUpdate(
+          req.params.id,
+          req.body,
+          { new: true, runValidators: true }
+      );
+
+      if (!updatedReservation) {
+          return res.status(404).json({ message: 'Réservation non trouvée' });
+      }
+
+      res.json({ message: 'Réservation mise à jour avec succès', reservation: updatedReservation });
+  } catch (error) {
+      res.status(500).json({ message: 'Erreur lors de la mise à jour de la réservation', error });
+  }
+});
 
 
 
