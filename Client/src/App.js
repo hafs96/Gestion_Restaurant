@@ -6,6 +6,7 @@ import SignupForm from './Component/SignupForm';
 import LoginForm from './Component/LoginForm';
 import Home from './Component/Home';
 import LearnMore from './Component/LearnMore';
+import ReservationList from './Component/ListReservation';
 import { ReservationProvider } from './contexts/ReservationContext';
 import { AuthProvider } from './contexts/AuthContext';
 
@@ -21,6 +22,7 @@ function App() {
                         <Route path="/signup" element={<SignupForm />} />
                         <Route path="/reservation" element={<ReservationForm />} />
                         <Route path='/learnmore' element={<LearnMore />} />
+                        <Route path='/Liste' element={<ReservationList />} />
                     </Routes>
                 </div>
             </ReservationProvider>

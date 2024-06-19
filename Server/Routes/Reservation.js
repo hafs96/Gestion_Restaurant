@@ -4,7 +4,6 @@ const express = require('express');
 const router = express.Router();
 const Reservation = require('../Models/ReservationModel');
 const Joi = require('joi');
-
 // Route POST pour créer une nouvelle réservation
 const reservationSchema = Joi.object({
   clientid: Joi.string().required(),
@@ -30,12 +29,13 @@ router.post('/api/reservation', async (req, res) => {
           datereservation,
           heurereservation
       });
-
       await newReservation.save();
       res.status(201).json({ message: 'Réservation créée avec succès', reservation: newReservation });
   } catch (error) {
       res.status(500).json({ message: 'Erreur lors de la création de la réservation', error });
   }
 });
+
+
 
 module.exports = router;

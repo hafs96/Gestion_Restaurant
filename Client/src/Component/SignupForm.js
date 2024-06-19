@@ -55,13 +55,6 @@ const SignupForm = () => {
           <label htmlFor="tele">Telephone</label>
           <input  type="text" name="telephone" placeholder="Telephone" value={formData.telephone} onChange={handleChange} required/>
         </div>
-        <div className="form-group">
-          <label htmlFor="role">Role</label>
-          <select name="role" value={formData.role} onChange={handleChange} required>
-            <option value="client">Client</option>
-            <option value="responsable">Responsable</option>
-          </select>
-        </div>
         <button type="submit" className="btn">S'inscrire</button>
         <hr /> <br />
         <p>Vous avez de compte ?<a href="/login"><strong> Se connecter</strong></a></p>
